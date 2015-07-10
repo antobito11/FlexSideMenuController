@@ -18,7 +18,7 @@ enum FlexMenuPosition {
 @property (assign, nonatomic) BOOL usesAutoLayout;
 
 @property(nonatomic, assign) BOOL isMenuVisible;
-
+@property (weak, nonatomic) UIViewController * statusBarStyleController;
 @property(nonatomic, assign) id<FlexSideMenuDelegate> delegate;
 
 @property(nonatomic, readonly) UIScreenEdgePanGestureRecognizer *leftEdgePanRecognizer;

@@ -44,6 +44,8 @@ static NSMutableArray *animationClasses;
         self.usesAutoLayout = usesAutoLayout;
         self.animator = animator;
         self.animationDuration = 0.25;
+        self.statusBarStyleController = contentViewController;
+
     }
     
     return self;
@@ -135,6 +137,7 @@ static NSMutableArray *animationClasses;
         self.view.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
     }
     
+    self.statusBarStyleController = [self leftMenuController];
     [self notifyMenuWillShow];
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
     [self.animator showSideMenuAnimated:self.selectedSideMenuContainer
@@ -153,6 +156,7 @@ static NSMutableArray *animationClasses;
 }
 
 - (void)hideSidebarViewController:(void (^)(void))onCompletion {
+    self.statusBarStyleController = [self contentController];
     [self notifyMenuWillHide];
     [self.contentController.view setUserInteractionEnabled:YES];
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
@@ -233,6 +237,10 @@ static NSMutableArray *animationClasses;
 
 - (void)setContentController:(UIViewController *)newContentController {
     [self.contentContainer setContentController:newContentController];
+}
+
+- (UIViewController *)childViewControllerForStatusBarStyle{
+    return self.statusBarStyleController;
 }
 
 @end
